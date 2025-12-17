@@ -27,3 +27,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Documentation files (keep only essential ones)
+# Keep: README.md, VERCEL_DEPLOY_REHBERI.md, PRODUCTION_HAZIRLIK_CHECKLIST.md, ENVIRONMENT_VARIABLES_REHBERI.md
+ADMIN_KULLANICI_OLUSTURMA.md
+DEPLOYMENT_GUVENLIK.md
+GUVENLIK_*.md
+RLS_*.md
+SUPABASE_*.md
+
+# SQL files (database schemas are already in Supabase)
+*.sql
