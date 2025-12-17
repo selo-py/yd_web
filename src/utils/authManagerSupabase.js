@@ -12,12 +12,18 @@ export async function loginAdmin(email, password) {
     })
 
     if (error) {
-      console.error('Login error:', error)
+      // Production'da detaylı error log'larını gizle (güvenlik için)
+      if (import.meta.env.PROD) {
+        // Production'da sadece generic mesaj göster
+      } else {
+        console.error('Login error:', error)
+      }
+      
+      // Tüm hatalar için generic mesaj (user enumeration saldırısını önlemek için)
+      // Kullanıcı adının var olup olmadığını anlamayı zorlaştırır
       return { 
         success: false, 
-        message: error.message === 'Invalid login credentials' 
-          ? 'E-posta veya şifre hatalı!' 
-          : 'Giriş sırasında bir hata oluştu!' 
+        message: 'E-posta veya şifre hatalı!' 
       }
     }
 
@@ -26,9 +32,10 @@ export async function loginAdmin(email, password) {
     if (!userRole || (userRole !== 'admin' && userRole !== 'editor')) {
       // Admin/Editor değilse çıkış yap
       await supabase.auth.signOut()
+      // Generic mesaj (rol bilgisini gizle)
       return { 
         success: false, 
-        message: 'Bu hesap admin paneline erişim yetkisine sahip değil!' 
+        message: 'E-posta veya şifre hatalı!' 
       }
     }
 
@@ -42,7 +49,10 @@ export async function loginAdmin(email, password) {
       }
     }
   } catch (error) {
-    console.error('Login error:', error)
+    // Production'da detaylı error log'larını gizle
+    if (!import.meta.env.PROD) {
+      console.error('Login error:', error)
+    }
     return { success: false, message: 'Giriş sırasında bir hata oluştu!' }
   }
 }
