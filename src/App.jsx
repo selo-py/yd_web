@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
@@ -48,50 +49,53 @@ function PublicLayout() {
 
 function App() {
   return (
-    <Routes>
-      {/* Admin Routes - No Navbar/Footer */}
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/*" element={
-        <div className="min-h-screen bg-white dark:bg-zinc-950">
-          <Routes>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="home-content" element={<HomeContentManager />} />
-            <Route path="video/add" element={<AddVideo />} />
-            <Route path="youtube/add" element={<AddYouTube />} />
-            <Route path="failure/add" element={<AddFailure />} />
-            <Route path="news/add" element={<AddNews />} />
-            <Route path="finans/add" element={<AddFinans />} />
-            <Route path=":type/list" element={<ContentList />} />
-            <Route path="video/edit/:id" element={<EditVideo />} />
-            <Route path="youtube/edit/:id" element={<EditYouTube />} />
-            <Route path="failure/edit/:id" element={<EditFailure />} />
-            <Route path="news/edit/:id" element={<EditNews />} />
-            <Route path="finans/edit/:id" element={<EditFinans />} />
-            <Route path="home-content-view" element={<HomeContentView />} />
-          </Routes>
-        </div>
-      } />
-      
-      {/* Public Routes - With Navbar/Footer */}
-      <Route path="/" element={<PublicLayout />}>
-        <Route index element={<Home />} />
-        <Route path="hakkimizda" element={<Hakkimizda />} />
-        <Route path="iletisim" element={<Iletisim />} />
-        <Route path="bulten" element={<Bulten />} />
-        <Route path="gizlilik-politikasi" element={<PrivacyPolicy />} />
-        <Route path="video" element={<VideoList />} />
-        <Route path="video/:slug" element={<VideoDetail />} />
-        <Route path="youtube" element={<YouTubeList />} />
-        <Route path="youtube/:slug" element={<YouTubeDetail />} />
-        <Route path="basarisizlik-hikayeleri" element={<FailureStories />} />
-        <Route path="basarisizlik-hikayeleri/:slug" element={<FailureDetail />} />
-        <Route path="yeni-dunya-haber" element={<NewsList />} />
-        <Route path="yeni-dunya-haber/:slug" element={<NewsDetail />} />
-        <Route path="finans" element={<FinansList />} />
-        <Route path="finans/:slug" element={<FinansDetail />} />
-        <Route path="*" element={<Navigate to="/video" replace />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        {/* Admin Routes - No Navbar/Footer */}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/*" element={
+          <div className="min-h-screen bg-white dark:bg-zinc-950">
+            <Routes>
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="home-content" element={<HomeContentManager />} />
+              <Route path="video/add" element={<AddVideo />} />
+              <Route path="youtube/add" element={<AddYouTube />} />
+              <Route path="failure/add" element={<AddFailure />} />
+              <Route path="news/add" element={<AddNews />} />
+              <Route path="finans/add" element={<AddFinans />} />
+              <Route path=":type/list" element={<ContentList />} />
+              <Route path="video/edit/:id" element={<EditVideo />} />
+              <Route path="youtube/edit/:id" element={<EditYouTube />} />
+              <Route path="failure/edit/:id" element={<EditFailure />} />
+              <Route path="news/edit/:id" element={<EditNews />} />
+              <Route path="finans/edit/:id" element={<EditFinans />} />
+              <Route path="home-content-view" element={<HomeContentView />} />
+            </Routes>
+          </div>
+        } />
+        
+        {/* Public Routes - With Navbar/Footer */}
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<Home />} />
+          <Route path="hakkimizda" element={<Hakkimizda />} />
+          <Route path="iletisim" element={<Iletisim />} />
+          <Route path="bulten" element={<Bulten />} />
+          <Route path="gizlilik-politikasi" element={<PrivacyPolicy />} />
+          <Route path="video" element={<VideoList />} />
+          <Route path="video/:slug" element={<VideoDetail />} />
+          <Route path="youtube" element={<YouTubeList />} />
+          <Route path="youtube/:slug" element={<YouTubeDetail />} />
+          <Route path="basarisizlik-hikayeleri" element={<FailureStories />} />
+          <Route path="basarisizlik-hikayeleri/:slug" element={<FailureDetail />} />
+          <Route path="yeni-dunya-haber" element={<NewsList />} />
+          <Route path="yeni-dunya-haber/:slug" element={<NewsDetail />} />
+          <Route path="finans" element={<FinansList />} />
+          <Route path="finans/:slug" element={<FinansDetail />} />
+          <Route path="*" element={<Navigate to="/video" replace />} />
+        </Route>
+      </Routes>
+      <SpeedInsights />
+    </>
   );
 }
 
