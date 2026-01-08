@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
@@ -91,6 +92,7 @@ function App() {
         <Route path="finans/:slug" element={<FinansDetail />} />
         <Route path="*" element={<Navigate to="/video" replace />} />
       </Route>
+      <Analytics />
     </Routes>
   );
 }
